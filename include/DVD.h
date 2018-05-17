@@ -1,16 +1,20 @@
 #ifndef DVD_H
 #define DVD_H
 
-class DVD : public Midia {
+#include "Midia.h"
+
+class Dvd : public Midia {
 	private:
 		Data duracao;
 		string classificacao;
 
+		void dadosDvd(istream &i);
+
 	public:
-		DVD(string titulo, string autor, Data anoLancamento,
+		Dvd(string titulo, string autor, Data anoLancamento,
 			Data duracao, string classificacao);
-		DVD();
-		~DVD();
+		Dvd();
+		~Dvd();
 
 		void setDuracao(Data duracao);
 		Data getDuracao();
@@ -18,7 +22,9 @@ class DVD : public Midia {
 		void setClassificacao(string classificacao);
 		string getClassificacao();
 
-		friend ostream& operator<<(ostream &o, DVD const &_dvd);
+		friend ostream& operator<<(ostream &o, Dvd const &_dvd);
+
+		friend istream& operator>>(istream &i, Dvd &_dvd);
 };
 
 #endif

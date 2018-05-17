@@ -13,6 +13,9 @@ Data::Data() {
 
 Data::~Data() {}
 
+void Data::setSeparador(char separador) {this->separador = separador;}
+
+
 void Data::setDia(int dia) {this->dia = dia;}
 int Data::getDia() {return dia;}
 

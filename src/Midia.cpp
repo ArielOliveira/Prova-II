@@ -3,19 +3,36 @@
 Midia::Midia(RAMO ramo, string titulo, string autor, Data anoLancamento) :  ramo(ramo),
 																			titulo(titulo), 
 																			autor(autor), 
-																			anoLancamento(anoLancamento) {}
+																			anoLancamento(anoLancamento) {
+	id++;
+}
 
 Midia::Midia() {
 	titulo = "";
 	autor = "";
 	anoLancamento = Data();
+
+	id++;
 }
 
 Midia::~Midia() {}
 
+int Midia::getId() {return id;}
+
 RAMO Midia::getRamo() {return ramo;}
 
-void Midia::dadosMidia(istream &i) {}
+void Midia::dadosMidia(istream &i) {
+	string valor;
+
+	getline(i, valor, ';');
+	stringstream(valor) >> titulo;
+
+	getline(i, valor, ';');
+	stringstream(valor) >> autor;
+
+	i >> anoLancamento;
+	i.ignore();
+}
 
 void Midia::setTitulo(string titulo) {this->titulo = titulo;}
 string Midia::getTitulo() {return titulo;}

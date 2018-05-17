@@ -8,6 +8,8 @@ class Livro : public Midia {
 		string editora;
 		string ISBN;
 
+		void dadosLivro(istream &i);
+
 	public:
 		Livro(string titulo, string autor, Data anoLancamento,
 				string editora, string ISBN);
@@ -21,6 +23,8 @@ class Livro : public Midia {
 		string getISBN();
 
 		friend ostream& operator<<(ostream &o, Livro const &_livro);
+
+		friend istream& operator>>(istream &i, Livro &_livro);
 };
 
 #endif	

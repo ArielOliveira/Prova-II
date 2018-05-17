@@ -3,16 +3,18 @@
 
 #include "Midia.h"
 
-class CD : public Midia {
+class Cd : public Midia {
 	private:
 		int faixas;
 		string gravadora;
 
+		void dadosCD(istream &i);
+
 	public:
-		CD(string titulo, string autor, Data anoLancamento,
+		Cd(string titulo, string autor, Data anoLancamento,
 			int faixas, string gravadora);
-		CD();
-		~CD();
+		Cd();
+		~Cd();
 
 		void setFaixas(int faixas);
 		int getFaixas();
@@ -20,7 +22,9 @@ class CD : public Midia {
 		void setGravadora(string gravadora);
 		string getGravadora();
 
-		friend ostream& operator<<(ostream &o, CD const &_cd);
+		friend ostream& operator<<(ostream &o, Cd const &_cd);
+
+		friend istream& operator>>(istream &i, Cd &_cd);
 };
 
 #endif

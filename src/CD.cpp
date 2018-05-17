@@ -1,27 +1,45 @@
 #include "CD.h"
 
-CD::CD(string titulo, string autor, Data anoLancamento,
-			int faixas, string gravadora) : Midia(CD, titulo, autor, anoLancamento),
+Cd::Cd(string titulo, string autor, Data anoLancamento, int faixas, string gravadora) : Midia(CD, titulo, autor, anoLancamento),
 											faixas(faixas), gravadora(gravadora) {}
 
-CD::CD() : Midia() {
+Cd::Cd() : Midia() {
 	faixas = 0;
 	gravadora = "";
 }
 
-CD::~CD() {}
+Cd::~Cd() {}
 
 
-void CD::setFaixas(int faixas) {this->faixas = faixas;}
-int CD::getFaixas() {return faixas;}
+void Cd::setFaixas(int faixas) {this->faixas = faixas;}
+int Cd::getFaixas() {return faixas;}
 
-void CD::setGravadora(string gravadora) {this->gravadora = gravadora;}
-string CD::getGravadora() {return gravadora;}
+void Cd::setGravadora(string gravadora) {this->gravadora = gravadora;}
+string Cd::getGravadora() {return gravadora;}
 
-ostream& operator<<(ostream &o, CD const &_cd) {
+void Cd::dadosCD(istream &i) {
+	string valor;
+
+	i >> faixas;
+	i.ignore();
+
+	getline(i, valor, ';');
+	stringstream(valor) >> gravadora;
+
+}
+
+ostream& operator<<(ostream &o, Cd const &_cd) {
 	o << (Midia&)_cd
-	  << _cd.faixas << endl
-	  << _cd.gravadora << endl;
+	  << "Faixas: " << _cd.faixas << endl
+	  << "Gravadora: " << _cd.gravadora << endl;
 
 	return o;
+}
+
+istream& operator>>(istream &i, Cd &_cd) {
+	_cd.dadosMidia(i);
+	_cd.dadosCD(i);
+
+	return i;
+
 }

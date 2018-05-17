@@ -7,6 +7,9 @@ using std::endl;
 #include <string>
 using std::string;
 
+#include <sstream>
+using std::stringstream;
+
 enum RAMO {
 	LIVRO,
 	CD,
@@ -16,7 +19,7 @@ enum RAMO {
 #include "Data.h"
 
 class Midia {
-	private:
+	protected:
 		RAMO ramo;
 
 		string titulo;
@@ -25,14 +28,16 @@ class Midia {
 
 		void dadosMidia(istream &i);
 
-		virtual void dados(istream &i) = 0;
-
 	public:
+		static int id;
+
 		Midia(RAMO ramo, string titulo, string autor, Data anoLancamento);
 		Midia();
 		~Midia();
 
 		RAMO getRamo();
+
+		int getId();
 
 		void setTitulo(string titulo);
 		string getTitulo();
@@ -44,6 +49,11 @@ class Midia {
 		Data getAnoLancamento();
 
 		friend ostream& operator<< (ostream &o, Midia const &_midia);
+
+		bool operator== (Midia const &_m) {
+			
+			return (_m.id == this->id) ? true : false;
+		}
 };
 
 #endif 

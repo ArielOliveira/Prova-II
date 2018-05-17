@@ -11,7 +11,7 @@ CC = g++
 
 CPPFLAGS = -Wall -pedantic -ansi -std=c++11
 
-OBJS = ./build/main.o ./build/Data.o ./build/Midia.o ./build/Livro.o ./build/CD.o
+OBJS = ./build/main.o ./build/fileHandler.o ./build/Data.o ./build/Midia.o ./build/Livro.o ./build/CD.o ./build/DVD.o ./build/Acervo.o
 
 acervo: $(acervo)
 
@@ -21,6 +21,9 @@ $(acervo): $(OBJS)
 
 ./build/main.o: ./src/main.cpp ./include/Midia.h
 	$(CC) -c $(CPPFLAGS) $<	-o $@
+
+./build/fileHandler.o: ./src/fileHandler.cpp ./include/fileHandler.h
+	$(CC) -c $(CPPFLAGS) $< -o $@
 
 ./build/Data.o: ./src/Data.cpp ./include/Data.h
 	$(CC) -c $(CPPFLAGS) $< -o $@
@@ -32,6 +35,12 @@ $(acervo): $(OBJS)
 	$(CC) -c $(CPPFLAGS) $< -o $@
 
 ./build/CD.o: ./src/CD.cpp ./include/CD.h
+	$(CC) -c $(CPPFLAGS) $< -o $@
+
+./build/DVD.o: ./src/DVD.cpp ./include/DVD.h
+	$(CC) -c $(CPPFLAGS) $< -o $@
+
+./build/Acervo.o: ./src/Acervo.cpp ./include/Acervo.h
 	$(CC) -c $(CPPFLAGS) $< -o $@
 
 debug: CPPFLAGS += -g -O0
