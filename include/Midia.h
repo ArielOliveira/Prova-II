@@ -33,7 +33,7 @@ class Midia {
 
 		Midia(RAMO ramo, string titulo, string autor, Data anoLancamento);
 		Midia();
-		~Midia();
+		virtual ~Midia();
 
 		RAMO getRamo();
 

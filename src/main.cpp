@@ -13,7 +13,7 @@ using std::cin;
 int Midia::id = 0;
 
 
-void lerTeclado(int valor) {
+void lerTeclado(int &valor) {
 	string informacao;
 	bool valida = true;
 	do {
@@ -23,27 +23,83 @@ void lerTeclado(int valor) {
 	} while (!(valida = (bool)(stringstream(informacao) >> valor)));
 }
 
-int main() {
-	int midia = 0;
+void inserirMidia(RAMO ramo, ifstream &file, Acervo *acervo) {
+	Midia *midia;
 
-	Acervo acervo = Acervo("Usuario");
+	Livro livro;
+	Cd cd;
+	Dvd dvd;
+	switch(ramo) {
+		case LIVRO: livro = Livro();
+					file >> livro;
+					midia = &livro;
+			break;
+		case CD: cd = Cd();
+				 file >> cd;
+				 midia = &cd;
+			break;
+		case DVD: dvd = Dvd();
+				  file >> dvd;
+				  midia = &dvd;
+			break;
+	}
+  	
+  	acervo->inserirMidia(*midia);
+}
 
-	Livro *livro = new Livro();
+bool selecioneMidia(Acervo *acervo, ifstream &file) {
+	int midia;
 
+	cout << "Selecione a Midia" << endl;
+	cout << "0 - Livro" << endl;
+	cout << "1 - CD" << endl;
+	cout << "2 - DVD" << endl;
 
-	ifstream file;
-	file.open("./data/midias.csv");
+	lerTeclado(midia);
 
-	if (!file) {
-		cout << "Erro ao abrir arquivo!" << endl;
+	cout << midia << endl;
+
+	if (midia < 0 || midia > 2 ) {
+		cout << "Opção inválida" << endl;
+		return false;
 	} else {
-		readFile(file, midia);
-		file >> *livro;
+		file.open("./data/midias.csv");
 
+		if (!file) {
+			cout << "Erro ao abrir arquivo!" << endl;
+		} else {
+			readFile(file, midia);
+			inserirMidia((RAMO)midia, file, acervo);
+		}
 	}
 
-	acervo.inserirMidia(livro);
+	file.close();
 
+	return true;
+}
+
+int continua() {
+	int valor;
+
+	cout << "Deseja inserir outra midia?" << endl;
+	cout << "0 - Não" << endl;
+	cout << "Qualquer outro valor para sim" << endl;
+
+	lerTeclado(valor);
+
+	return valor;
+}
+
+int main() {
+	int continuar = 1;
+	Acervo *acervo = new Acervo("Usuario");
+	ifstream file;
+	
+	while (continuar) {
+		selecioneMidia(acervo, file);
+		acervo->mostrarAcervo();
+	}
+	
 	
 	return 0;
 }

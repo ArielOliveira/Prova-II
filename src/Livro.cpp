@@ -9,6 +9,8 @@ Livro::Livro() : Midia() {
 	ISBN = "";
 }
 
+Livro::~Livro() {}
+
 void Livro::setEditora(string editora) {this->editora = editora;}
 string Livro::getEditora() {return editora;}
 

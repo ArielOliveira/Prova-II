@@ -122,7 +122,7 @@ void List<T>::insertAtTail(T data) {
 
 template <typename T>
 bool List<T>::insertAt(int index, T data) {
-	if (index > size || index < 0) return false;
+	if (index < size || index > 0) return false;
 
 	Node<T> *inserted = new Node<T>(data);
 	inserted->next = NULL;
@@ -193,12 +193,12 @@ template <typename T>
 void List<T>::printList() {
 	Node<T> *runner = head;
 	while((runner = runner->next) && (runner != tail)) {
-		switch(runner->data.ramo) {
-			case LIVRO: std::cout << (Livro)runner->data << std::endl;
+		switch(runner->data->getRamo()) {
+			case LIVRO: std::cout << (Livro*)runner->data << std::endl;
 				break;
-			case CD: std::cout << (Cd)runner->data << std::endl;
+			case CD: std::cout << (Cd*)runner->data << std::endl;
 				break;
-			case DVD: std::cout << (Dvd)runner->data << std::endl;
+			case DVD: std::cout << (Dvd*)runner->data << std::endl;
 				break;
 		}
 	}

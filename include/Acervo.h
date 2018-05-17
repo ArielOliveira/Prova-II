@@ -19,6 +19,8 @@ class Acervo {
 
 		bool removerMidia(int id);
 
+		void mostrarAcervo();
+
 		void setUsuario(string usuario);
 		string getUsuario();
 
