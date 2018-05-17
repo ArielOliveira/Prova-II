@@ -1,8 +1,9 @@
 #include "Midia.h"
 
-Midia::Midia(string titulo, string autor, Data anoLancamento) : titulo(titulo), 
-																autor(autor), 
-																anoLancamento(anoLancamento) {}
+Midia::Midia(RAMO ramo, string titulo, string autor, Data anoLancamento) :  ramo(ramo),
+																			titulo(titulo), 
+																			autor(autor), 
+																			anoLancamento(anoLancamento) {}
 
 Midia::Midia() {
 	titulo = "";
@@ -12,7 +13,7 @@ Midia::Midia() {
 
 Midia::~Midia() {}
 
-RAMO getRamo() {return ramo;}
+RAMO Midia::getRamo() {return ramo;}
 
 void Midia::dadosMidia(istream &i) {}
 

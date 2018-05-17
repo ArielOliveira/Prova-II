@@ -1,8 +1,11 @@
 #include "Data.h"
 
-Data::Data(int dia, int mes, int ano) : dia(dia), mes(mes), ano(ano) {}
+Data::Data(int dia, int mes, int ano) : dia(dia), mes(mes), ano(ano) {
+	separador = '/';
+}
 		
 Data::Data() {
+			separador = '/';
 			dia = 0;
 			mes = 0;
 			ano = 0;
@@ -21,7 +24,7 @@ int Data::getAno() {return ano;}
 
 
 ostream& operator<<(ostream &o, Data const &_data) {
-	o << _data.dia << "/" << _data.mes << "/" << _data.ano;
+	o << _data.dia << _data.separador << _data.mes << _data.separador << _data.ano;
 
 	return o;
 }

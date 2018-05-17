@@ -1,7 +1,7 @@
 #include "Livro.h"
 
 Livro::Livro(string titulo, string autor, Data anoLancamento,
-				string editora, string ISBN) : Midia(titulo, autor, anoLancamento),
+				string editora, string ISBN) : Midia(LIVRO, titulo, autor, anoLancamento),
 												editora(editora), ISBN(ISBN) {}
 
 Livro::Livro() : Midia() {

@@ -1,15 +1,15 @@
 #include "CD.h"
 
 CD::CD(string titulo, string autor, Data anoLancamento,
-			int faixas, string gravadora) : Midia(titulo, autora, anoLancamento),
+			int faixas, string gravadora) : Midia(CD, titulo, autor, anoLancamento),
 											faixas(faixas), gravadora(gravadora) {}
 
-CD() Midia() {
+CD::CD() : Midia() {
 	faixas = 0;
 	gravadora = "";
 }
 
-~CD() {}
+CD::~CD() {}
 
 
 void CD::setFaixas(int faixas) {this->faixas = faixas;}
@@ -25,5 +25,3 @@ ostream& operator<<(ostream &o, CD const &_cd) {
 
 	return o;
 }
-
-		}

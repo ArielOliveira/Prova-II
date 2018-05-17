@@ -18,10 +18,15 @@ class Data {
 		int dia;
 		int mes;
 		int ano;
+
+		char separador;
+
 	public:
 		Data(int dia, int mes, int ano);
 		Data();
 		~Data();
+
+		void setSeparador(char separador);
 
 		void setDia(int dia);
 		int getDia();
@@ -48,7 +53,6 @@ class Data {
 
 			return Data(dia, mes, ano);
 		}
-
 };
 
 #endif
