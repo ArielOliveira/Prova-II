@@ -122,7 +122,7 @@ void List<T>::insertAtTail(T data) {
 
 template <typename T>
 bool List<T>::insertAt(int index, T data) {
-	if (index < size || index > 0) return false;
+	if (index > size || index < 0) return false;
 
 	Node<T> *inserted = new Node<T>(data);
 	inserted->next = NULL;
