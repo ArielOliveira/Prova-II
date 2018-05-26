@@ -43,10 +43,12 @@ string Midia::getAutor() {return autor;}
 void Midia::setAnoLancamento(Data anoLancamento) {this->anoLancamento = anoLancamento;}
 Data Midia::getAnoLancamento() {return anoLancamento;}
 
-ostream& operator<< (ostream &o, Midia const &_midia) {
+ostream& operator<< (ostream &o, const Midia &_midia) {
 	o << "Titulo: " << _midia.titulo << endl
 	  << "Autor: " << _midia.autor << endl
 	  << "Ano de Lançamento: " << _midia.anoLancamento << endl;
+
+	  _midia.exibirDados(o);
 
 	return o;
 }

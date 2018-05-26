@@ -41,18 +41,6 @@ class Data {
 
 		friend istream& operator>>(istream &i, Data &_data);
 
-		
-		Data operator=(string const &_data) {
-			int dia, mes, ano;
-
-			stringstream(_data) >> dia;
-
-			stringstream(_data) >> mes;
-
-			stringstream(_data) >> ano;
-
-			return Data(dia, mes, ano);
-		}
 };
 
 #endif

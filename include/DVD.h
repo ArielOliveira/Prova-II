@@ -10,6 +10,8 @@ class Dvd : public Midia {
 
 		void dadosDvd(istream &i);
 
+		void exibirDados(ostream &o) const;
+
 	public:
 		Dvd(string titulo, string autor, Data anoLancamento,
 			Data duracao, string classificacao);
@@ -21,8 +23,6 @@ class Dvd : public Midia {
 
 		void setClassificacao(string classificacao);
 		string getClassificacao();
-
-		friend ostream& operator<<(ostream &o, Dvd const &_dvd);
 
 		friend istream& operator>>(istream &i, Dvd &_dvd);
 };

@@ -28,6 +28,8 @@ class Midia {
 
 		void dadosMidia(istream &i);
 
+		virtual void exibirDados(ostream &o) const = 0;
+
 	public:
 		static int id;
 
@@ -50,10 +52,10 @@ class Midia {
 
 		friend ostream& operator<< (ostream &o, Midia const &_midia);
 
-		bool operator== (Midia const &_m) {
-			
-			return (_m.id == this->id) ? true : false;
-		}
+		bool operator== (Midia const &_m) {return (_m.id == this->id) ? true : false;}
+
+		bool operator> (Midia const &_m) {return (_m.titulo > this->titulo) ? true : false;}
+
 };
 
 #endif 

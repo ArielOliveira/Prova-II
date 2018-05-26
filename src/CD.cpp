@@ -28,13 +28,7 @@ void Cd::dadosCD(istream &i) {
 
 }
 
-ostream& operator<<(ostream &o, Cd const &_cd) {
-	o << (Midia&)_cd
-	  << "Faixas: " << _cd.faixas << endl
-	  << "Gravadora: " << _cd.gravadora << endl;
-
-	return o;
-}
+void Cd::exibirDados(ostream &o) const {}
 
 istream& operator>>(istream &i, Cd &_cd) {
 	_cd.dadosMidia(i);

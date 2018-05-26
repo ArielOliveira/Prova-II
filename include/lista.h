@@ -5,10 +5,38 @@
 using std::cout;
 using std::endl;
 
-#include "Midia.h"
-#include "CD.h"
-#include "DVD.h"
-#include "Livro.h"
+#include <ostream>
+using std::ostream;
+
+template<typename T>
+class Iterator {
+	private:
+		 T *ptr;
+	public:
+		friend ostream& operator<< (ostream &o, const Iterator<T> &it) {
+			o << it.ptr->data;
+
+			return o;
+		}
+
+		inline Iterator& operator= (const Iterator<T> &it) {
+			ptr = it.ptr;
+			return *this;
+		}
+
+		inline bool operator!= (const Iterator<T> &it) {return (it.ptr != ptr) ? true : false;}
+
+		inline Iterator& operator++() {
+			ptr = ptr->next;
+			return *this;
+		}
+
+		inline Iterator& operator--() {
+			ptr = ptr->previous;
+			return *this;
+		}
+
+};
 
 template<typename T>
 	class Node {
@@ -32,6 +60,8 @@ class List {
 		Node<T> *head;
 		Node<T> *tail;
 	public:
+		static Iterator<T> iterator;
+
 		List();
 		~List();
 
@@ -47,10 +77,12 @@ class List {
 
 		int getSize();
 
+		Node<T>* getBegin();
+		Node<T>* getEnd();
+
 		T getData(int index);
 
 		void deleteList();
-		void printList();
 };
 
 template <typename T>
@@ -72,20 +104,11 @@ template <typename T>
 void List<T>::insertOrdered(T data) {
 	Node<T> *inserted = new Node<T>(data);
 
-	Node<T> *j, *temp;
 	Node<T> *runner = head;
 
-	int i = 1;
+	while(((runner = runner->next) && (runner != tail)) && runner->data > runner->next->data) {}
 
-	while(((runner = runner->next) && (runner != tail)) && runner->data > runner->next->data) {
-		j = runner;
-		if ((j->data > head->next->data) && (j->data < j->previous->data)) {
-			temp = j;
-			j = j->previous;
-		}
-		i++;
-	}
-
+	connect(inserted, runner);
 }
 	
 template <typename T>
@@ -162,7 +185,7 @@ bool List<T>::removeAtTail() {
 
 template <typename T>
 bool List<T>::removeAt(int index) {
-	if (index > size || index < 0) return false;
+	if (index > size || index < 1) return false;
 
 	Node<T> *sentry;
 
@@ -179,29 +202,22 @@ template <typename T>
 int List<T>::getSize() {return size;}
 
 template <typename T>
+Node<T>* List<T>::getBegin() {return head->next;}
+
+template <typename T>
+Node<T>* List<T>::getEnd() {return tail->previous;}
+
+template <typename T>
 T List<T>::getData(int index) {
 	Node<T> *sentry;
-	if (index <= size && index > 0) {
+	if (index <= size || index > 0) {
 		findNode(index, sentry);
+		return sentry->data;
 	} else {
 		std::cout << "Impossível encontrar elemento. Posição fora da lista" << std::endl;
 	}
-		return sentry->data;
-}
 
-template <typename T>
-void List<T>::printList() {
-	Node<T> *runner = head;
-	while((runner = runner->next) && (runner != tail)) {
-		switch(runner->data->getRamo()) {
-			case LIVRO: std::cout << (Livro*)runner->data << std::endl;
-				break;
-			case CD: std::cout << (Cd*)runner->data << std::endl;
-				break;
-			case DVD: std::cout << (Dvd*)runner->data << std::endl;
-				break;
-		}
-	}
+	return NULL;
 }
 	
 template <typename T>

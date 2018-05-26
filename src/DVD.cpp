@@ -30,12 +30,9 @@ void Dvd::dadosDvd(istream &i) {
 	stringstream(valor) >> classificacao;
 }
 
-ostream& operator<<(ostream &o, Dvd const &_dvd) {
-	o << (Midia&)_dvd
-	  << "Duração: " << _dvd.duracao << endl
-	  << "Classificação: " << _dvd.classificacao << endl;
-
-	return o;
+void Dvd::exibirDados(ostream &o) const {
+	o << "Duração: " << duracao << endl
+	  << "Classificação: " << classificacao << endl;
 }
 
 istream& operator>>(istream &i, Dvd &_dvd) {

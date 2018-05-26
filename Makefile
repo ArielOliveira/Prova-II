@@ -40,7 +40,7 @@ $(acervo): $(OBJS)
 ./build/DVD.o: ./src/DVD.cpp ./include/DVD.h
 	$(CC) -c $(CPPFLAGS) $< -o $@
 
-./build/Acervo.o: ./src/Acervo.cpp ./include/Acervo.h
+./build/Acervo.o: ./src/Acervo.cpp ./include/Acervo.h ./include/lista.h
 	$(CC) -c $(CPPFLAGS) $< -o $@
 
 debug: CPPFLAGS += -g -O0

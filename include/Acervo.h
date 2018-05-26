@@ -15,7 +15,7 @@ class Acervo {
 		Acervo();
 		~Acervo();
 
-		bool inserirMidia(Midia midia);
+		bool inserirMidia(Midia *midia);
 
 		bool removerMidia(int id);
 

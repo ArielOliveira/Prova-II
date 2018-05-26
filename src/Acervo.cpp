@@ -10,31 +10,43 @@ Acervo::Acervo() {
 }
 Acervo::~Acervo() {}
 
-bool Acervo::inserirMidia(Midia midia) {
+bool Acervo::inserirMidia(Midia *midia) {
 	if (midias->getSize() > 1) {
 		for(int i = 0; i < midias->getSize(); i++) {
-			if (midia == *midias->getData(i)) 
+			if (*midia == *midias->getData(i)) 
 				return false;
 		}
 	}
-	midias->insertAtHead(&midia);
+	midias->insertAtHead(midia);
 
 	return true;
 }
 
 bool Acervo::removerMidia(int id) {
+	/*
+	Iterator<Midia*> it;
+
+	for (it = midias->getBegin(); it != midias->getEnd(); it++) {
+
+	}
+	*/
+
+	
 	for(int i = 0; i < midias->getSize(); i++) {
 		if (midias->getData(i)->getId() == id) {
 			midias->removeAt(i);
 			return true;
 		}
 	}
+	
 
 	return false;
 }
 
 void Acervo::mostrarAcervo() {
-	midias->printList();
+	for (int i = 1; i <= midias->getSize(); i++) {
+		cout << *midias->getData(i) << endl;
+	}
 }
 
 void Acervo::setUsuario(string usuario) {this->usuario = usuario;}

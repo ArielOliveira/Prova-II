@@ -27,12 +27,9 @@ void Livro::dadosLivro(istream &i) {
 	stringstream(valor) >> ISBN;
 }
 
-ostream& operator<<(ostream &o, Livro const &_livro) {
-	o << (Midia&)_livro
-	  << "Editora: " << _livro.editora << endl
-	  << "ISBN: " << _livro.ISBN << endl;
-
-	return o;
+void Livro::exibirDados(ostream &o) const {
+	o << "Editora: " << editora << endl
+	  << "ISBN: " << ISBN << endl;
 }
 
 istream& operator>>(istream &i, Livro &_livro) {
