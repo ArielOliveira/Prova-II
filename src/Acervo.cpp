@@ -23,14 +23,11 @@ bool Acervo::inserirMidia(Midia *midia) {
 }
 
 bool Acervo::removerMidia(int id) {
-	/*
-	Iterator<Midia*> it;
+	List<Midia*>::iterator it;
 
 	for (it = midias->getBegin(); it != midias->getEnd(); it++) {
 
 	}
-	*/
-
 	
 	for(int i = 0; i < midias->getSize(); i++) {
 		if (midias->getData(i)->getId() == id) {
@@ -39,11 +36,14 @@ bool Acervo::removerMidia(int id) {
 		}
 	}
 	
-
 	return false;
 }
 
 void Acervo::mostrarAcervo() {
+	for (List<Midia*>::iterator it = midias->getBegin(); it != midias->getEnd(); it++) {
+		cout << it << endl;
+	}
+
 	for (int i = 1; i <= midias->getSize(); i++) {
 		cout << *midias->getData(i) << endl;
 	}

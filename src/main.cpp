@@ -24,7 +24,10 @@ int main() {
 
 	Midia *midia = new Livro("umLivro", "umAutor", d, "umaEditora", "ISBN");
 
+	Midia *midia1 = new Dvd("umDvd", "umAutor", d, d, "+18");
+
 	acervo->inserirMidia(midia);
+	acervo->inserirMidia(midia1);
 
 	acervo->mostrarAcervo();
 	

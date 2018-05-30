@@ -11,10 +11,14 @@ using std::ostream;
 template<typename T>
 class Iterator {
 	private:
-		 T *ptr;
+		 T ptr;
 	public:
+		Iterator(const T &ptr): ptr(ptr) {}
+		Iterator() {}
+		~Iterator() {}
+
 		friend ostream& operator<< (ostream &o, const Iterator<T> &it) {
-			o << it.ptr->data;
+			o << it.ptr;
 
 			return o;
 		}
@@ -26,14 +30,22 @@ class Iterator {
 
 		inline bool operator!= (const Iterator<T> &it) {return (it.ptr != ptr) ? true : false;}
 
-		inline Iterator& operator++() {
-			ptr = ptr->next;
+		inline Iterator& operator++(int) {
+			this->ptr = ptr->next;
 			return *this;
 		}
 
-		inline Iterator& operator--() {
-			ptr = ptr->previous;
+		inline Iterator& operator--(int) {
+			this->ptr = ptr->previous;
 			return *this;
+		}
+
+		inline Iterator& operator* () {
+
+		}
+
+		static void operator delete(void* ptr, std::size_t sz) {
+
 		}
 
 };
@@ -47,6 +59,12 @@ template<typename T>
 			T data;
 			Node *next;
 			Node *previous;
+
+			friend ostream& operator<< (ostream &o, const Node<T> &_node) {
+				o << _node.data;
+
+				return o;
+			}
 };
 
 template <typename T>
@@ -60,7 +78,10 @@ class List {
 		Node<T> *head;
 		Node<T> *tail;
 	public:
-		static Iterator<T> iterator;
+		typedef Iterator<Node<T>*> iterator;
+
+		iterator getBegin() {return iterator(head->next);}
+		iterator getEnd() {return iterator(tail);}
 
 		List();
 		~List();
@@ -76,9 +97,6 @@ class List {
 		bool removeAt(int index);
 
 		int getSize();
-
-		Node<T>* getBegin();
-		Node<T>* getEnd();
 
 		T getData(int index);
 
@@ -202,12 +220,6 @@ template <typename T>
 int List<T>::getSize() {return size;}
 
 template <typename T>
-Node<T>* List<T>::getBegin() {return head->next;}
-
-template <typename T>
-Node<T>* List<T>::getEnd() {return tail->previous;}
-
-template <typename T>
 T List<T>::getData(int index) {
 	Node<T> *sentry;
 	if (index <= size || index > 0) {
@@ -217,7 +229,7 @@ T List<T>::getData(int index) {
 		std::cout << "Impossível encontrar elemento. Posição fora da lista" << std::endl;
 	}
 
-	return NULL;
+	return sentry->data = 0;
 }
 	
 template <typename T>
@@ -245,6 +257,11 @@ void List<T>::findNode(int index, Node<T> *&sentry) {
 		sentry = tail->previous;
 		for (int count = size; count > index; count--) {
 		sentry = sentry->previous;
+		}
+	} else {
+		sentry = head->next;
+		for (int count = size; count < index; count++) {
+		sentry = sentry->next;
 		}
 	}
 }
